@@ -1,3 +1,73 @@
+#sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #444;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.5s;
+}
+
+#sidebar button {
+    padding: 8px 8px 8px 32px;
+    color: cadetblue;
+}
+
+#sidebar button:hover {
+    color: cornflowerblue;
+}
+
+#close-sidebar {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+#open-sidebar {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+}
+
+#open-sidebar:hover {
+    background-color: #444;
+}
+
+#add-task-modal {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    outline: 4px red solid;
+    padding: 16px;
+    z-index: 99999;
+    pointer-events: auto;
+}
+
+#new-project-modal {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    pointer-events: auto;
+}
+
+.project-container {
+    border: #444;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-color: darkblue;
+    color: white;
+}
+
 .todo-container {
     outline: red 2px solid;
 }

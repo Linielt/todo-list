@@ -1,70 +1,81 @@
-export const displayTodos = (project) => {
-    const content = document.getElementById("content");
+export const createTodoDisclosureWidgetsFromProject = (project) => {
     for (let todo of project.todos) {
-        const todoContainer = document.createElement("div");
-        const todoTitle = document.createElement("h3");
-        const todoDescription = document.createElement("p");
-        const todoDueDate = document.createElement("p");
-        const todoPriority = document.createElement("h5");
-        const todoComplete = document.createElement("h5");
+        createTodoDisclosureWidget(todo)
+    }
+};
 
-        todoContainer.className = "todo-container";
-        todoTitle.textContent = todo.title;
-        todoDescription.textContent = todo.description;
-        todoDueDate.textContent = todo.dueDate;
-        todoPriority.textContent = todo.priority;
-        
-        if (todo.complete) {
-            todoComplete.textContent = "Done";
-        }
+export const createTodoDisclosureWidget = (todo) => {
+    const content = document.getElementById("content");
+    const disclousureWidget = document.createElement("details");
+    const widgetSummary = document.createElement("summary");
+    const todoDescription = document.createElement("p");
+    const todoDueDate = document.createElement("p");
+    const deleteButton = document.createElement("button");
+    const editButton = document.createElement("button");
+    const completeButton = document.createElement("button");
 
-        todoContainer.appendChild(todoTitle);
-        todoContainer.appendChild(todoDescription);
-        todoContainer.appendChild(todoDueDate);
-        todoContainer.appendChild(todoPriority);
-        todoContainer.appendChild(todoComplete);
-        content.appendChild(todoContainer); 
+    widgetSummary.innerHTML = todo.title;
+    todoDescription.textContent = todo.description;
+    todoDueDate.textContent = todo.dueDate;
+    deleteButton.textContent = "Delete";
+    deleteButton.style.backgroundColor = "red";
+    editButton.textContent = "Edit";
+    completeButton.textContent = "Complete";
+
+    disclousureWidget.appendChild(widgetSummary);
+    disclousureWidget.appendChild(todoDescription);
+    disclousureWidget.appendChild(todoDueDate);
+    disclousureWidget.appendChild(deleteButton);
+    disclousureWidget.appendChild(editButton);
+    disclousureWidget.appendChild(completeButton);
+    content.appendChild(disclousureWidget);
+
+    deleteButton.addEventListener("click", () => {
+        disclousureWidget.remove();
+        project.removeTodo(todo);
+    });
+
+    completeButton.addEventListener("click", () => {
+        todo.complete = !todo.complete;
+        completeButton.classList.toggle("complete");
+    });
+}
+
+export const fillProjectsList = (projects) => {
+    for (const project of projects) {
+        addProjectToProjectsList(project);
     }
 }
 
-export const createTodoDisclosureWidgets = (project) => {
-    const content = document.getElementById("content");
-    
-    for (let todo of project.todos) {
-        const disclousureWidget = document.createElement("details");
-        const widgetSummary = document.createElement("summary");
-        const todoDescription = document.createElement("p");
-        const todoDueDate = document.createElement("p");
-        const deleteButton = document.createElement("button");
-        const editButton = document.createElement("button");
-        const completeButton = document.createElement("button");
+export const addProjectToProjectsList = (project) => {
+    const projectList = document.getElementById("projects");
 
-        widgetSummary.innerHTML = todo.title;
-        todoDescription.textContent = todo.description;
-        todoDueDate.textContent = todo.dueDate;
-        deleteButton.textContent = "Delete";
-        deleteButton.style.backgroundColor = "red";
-        editButton.textContent = "Edit";
-        completeButton.textContent = "Complete";
+    const projectContainer = document.createElement("div");
+    const projectName = document.createElement("h3");
 
-        disclousureWidget.appendChild(widgetSummary);
-        disclousureWidget.appendChild(todoDescription);
-        disclousureWidget.appendChild(todoDueDate);
-        disclousureWidget.appendChild(deleteButton);
-        disclousureWidget.appendChild(editButton);
-        disclousureWidget.appendChild(completeButton);
-        content.appendChild(disclousureWidget);
+    projectContainer.className = "project-container";
+    projectName.textContent = project.name;
 
-        deleteButton.addEventListener("click", () => {
-            disclousureWidget.remove();
-            project.removeTodo(todo);
-        });
-
-        completeButton.addEventListener("click", () => {
-            todo.complete = !todo.complete;
-            completeButton.classList.toggle("complete");
-        });
-
-        
-    }
+    projectContainer.appendChild(projectName);
+    projectList.appendChild(projectContainer);
 };
+
+export const showAddTaskForm = () => {
+    document.getElementById("add-task-modal").style.display = "flex";
+    document.body.style.pointerEvents = "none";
+}
+
+export const hideAddTaskForm = () => {
+    document.getElementById("add-task-modal").style.display = "none";
+    document.body.style.pointerEvents = "auto";
+}
+
+export const showAddNewProjectForm = () => {
+    document.getElementById("new-project-modal").style.display = "flex";
+    document.body.style.pointerEvents = "none";
+}
+
+export const hideAddNewProjectForm = () => {
+    document.getElementById("new-project-modal").style.display = "none";
+    document.body.style.pointerEvents = "auto";
+}

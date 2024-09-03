@@ -52,6 +52,16 @@ export class TodoItem {
     set complete(complete) {
         this.#complete = complete;
     }
+
+    toJSON() {
+        return {
+            "title":`${this.#title}`,
+            "description":`${this.#description}`,
+            "dueDate":`${this.#dueDate}`,
+            "priority":`${this.#priority}`,
+            "complete":`${this.#complete}`
+        }
+    }
 }
 
 export class Project {
@@ -84,6 +94,16 @@ export class Project {
         if (toDeleteIndex > -1) {
             this.#todos.splice(toDeleteIndex, 1);
         }
+    }
+
+    toJSON() {
+        let todosJSON = [];
+
+        for (let todo of this.#todos) {
+            todosJSON.push(todo.toJSON());
+        }
+
+        return {"name":`${this.#name}`, "todos":`${JSON.stringify(todosJSON)}`};
     }
 }
 

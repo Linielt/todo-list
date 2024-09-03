@@ -17,5 +17,9 @@ export const storageAvailable = (type) => {
     }
 }
 
+localStorage.setItem("test1", "test2");
 
+localStorage.setItem("projects", JSON.stringify("aaaa"));
+
+// const localStorageProjects = JSON.parse(localStorage.getItem("projects") || "[]");
   

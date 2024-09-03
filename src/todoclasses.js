@@ -62,6 +62,10 @@ export class TodoItem {
             "complete":`${this.#complete}`
         }
     }
+
+    static fromJSON(json) {
+        return new TodoItem(json.title, json.description, json.dueDate, json.priority, json.complete);
+    }
 }
 
 export class Project {
@@ -104,6 +108,16 @@ export class Project {
         }
 
         return {"name":`${this.#name}`, "todos":`${JSON.stringify(todosJSON)}`};
+    }
+
+    static fromJSON(json) {
+        let revivedTodos = [];
+
+        for (let todo of json.todos) {
+            revivedTodos.push(TodoItem.fromJSON(todo));
+        }
+
+        return new Project(json.title, revivedTodos);
     }
 }
 

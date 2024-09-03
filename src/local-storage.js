@@ -1,3 +1,5 @@
+import { Project } from "./todoclasses"; 
+
 export const storageAvailable = (type) => {
     let storage;
     try {
@@ -17,9 +19,24 @@ export const storageAvailable = (type) => {
     }
 }
 
-localStorage.setItem("test1", "test2");
+export const getProjectsFromLocalStorage = () => {
+    if (storageAvailable("localStorage")) {
+        const projects = JSON.parse(localStorage.getItem("projects") || "[]");
+        const revivedObjects = [];
 
-localStorage.setItem("projects", JSON.stringify("aaaa"));
+        for (let project of projects) {
+            revivedObjects.push(Project.fromJSON(project));
+        }
+
+        return revivedObjects;
+    }
+}
+
+export const saveProjectsToLocalStorage = (projects) => {
+    if (storageAvailable("localStorage")) {
+        localStorage.setItem("projects", JSON.stringify(projects));
+    }
+}
 
 // const localStorageProjects = JSON.parse(localStorage.getItem("projects") || "[]");
   

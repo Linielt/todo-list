@@ -1,6 +1,6 @@
 export const openSidebar = () => {
     const sidebar = document.getElementById("sidebar");
-    sidebar.style.width = "20%";
+    sidebar.style.width = "400px";
 }
 
 export const closeSidebar = () => {

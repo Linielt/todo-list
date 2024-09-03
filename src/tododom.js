@@ -1,10 +1,10 @@
 export const createTodoDisclosureWidgetsFromProject = (project) => {
     for (let todo of project.todos) {
-        createTodoDisclosureWidget(todo)
+        createTodoDisclosureWidget(todo, project);
     }
 };
 
-export const createTodoDisclosureWidget = (todo) => {
+export const createTodoDisclosureWidget = (todo, project) => {
     const content = document.getElementById("content");
     const disclousureWidget = document.createElement("details");
     const widgetSummary = document.createElement("summary");
@@ -51,13 +51,17 @@ export const addProjectToProjectsList = (project) => {
     const projectList = document.getElementById("projects");
 
     const projectContainer = document.createElement("div");
-    const projectName = document.createElement("h3");
+    const projectName = document.createElement("p");
 
     projectContainer.className = "project-container";
     projectName.textContent = project.name;
 
     projectContainer.appendChild(projectName);
     projectList.appendChild(projectContainer);
+};
+
+export const changeProject = (project) => {
+    return project;
 };
 
 export const showAddTaskForm = () => {

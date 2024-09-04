@@ -104,7 +104,7 @@ header {
     background-color: #444;
 }
 
-#add-task-modal {
+#task-modal {
     display: none;
     justify-content: center;
     align-items: center;

@@ -104,6 +104,16 @@ export class Project {
         }
     }
 
+    alreadyHasTodoTitle(title) {
+        for (let todoTitle of this.#todos.title) {
+            if (todoTitle == title) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     toJSON() {
         let todosJSON = [];
         console.log("aaaa");

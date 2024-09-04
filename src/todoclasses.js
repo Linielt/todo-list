@@ -106,6 +106,7 @@ export class Project {
 
     toJSON() {
         let todosJSON = [];
+        console.log("aaaa");
 
         for (let todo of this.#todos) {
             todosJSON.push(todo.toJSON());
@@ -117,11 +118,17 @@ export class Project {
     static fromJSON(json) {
         let revivedTodos = [];
 
-        for (let todo of json.todos) {
-            revivedTodos.push(TodoItem.fromJSON(todo));
+        for (let jsonTodo of JSON.parse(json.todos)) {
+            revivedTodos.push(TodoItem.fromJSON(jsonTodo));
         }
 
-        return new Project(json.title, revivedTodos);
+        let revivedObject = new Project(json.name);
+        
+        for (let revivedTodo of revivedTodos) {
+            revivedObject.todos.push(revivedTodo);
+        }
+
+        return revivedObject;
     }
 }
 

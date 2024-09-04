@@ -37,12 +37,15 @@ const createTodoDisclosureWidget = (todo, project) => {
         project.removeTodo(todo);
     });
 
+    editButton.addEventListener("click", () => {
+        return null; // TODO -  Implement this
+    })
+
     completeButton.addEventListener("click", () => {
         todo.complete = !todo.complete;
         completeButton.classList.toggle("complete");
     });
 }
-
 export const fillProjectsList = (projects) => {
     document.getElementById("projects").innerHTML = "";
     for (const project of projects) {
@@ -67,10 +70,6 @@ const addProjectToProjectsList = (project) => {
     });
 };
 
-export const changeProject = (project) => {
-    return project; // TODO - Edit this
-};
-
 const showAddTaskForm = () => {
     document.getElementById("add-task-modal").style.display = "flex";
     document.body.style.pointerEvents = "none";
@@ -93,7 +92,7 @@ export const hideAddNewProjectForm = () => {
 
 let controller = new AbortController();
 
-export const displayProject = (project) => {
+export const displayProject = (project) => { // This function is terrible
     const content = document.getElementById("content");
     content.innerHTML = "";
 
@@ -109,7 +108,7 @@ export const displayProject = (project) => {
 
     const addTaskForm = document.getElementById("add-task-form");
 
-    const deleteAddTaskHandler = () => {
+    const deleteAndAddTaskHandler = () => { // TODO - Weird revelation, just create a one use event handler whenever the add task button is pressed
         controller.abort();
         controller = new AbortController();
         addTaskForm.addEventListener("submit",
@@ -134,7 +133,7 @@ export const displayProject = (project) => {
         )
     }
 
-    deleteAddTaskHandler();
+    deleteAndAddTaskHandler();
 
     const closeNewTaskModalButton = document.getElementById("close-add-task-modal-button");
     closeNewTaskModalButton.addEventListener("click", hideAddTaskForm);

@@ -13,7 +13,7 @@ const sidebarCloseButton = document.getElementById("close-sidebar");
 sidebarOpenButton.addEventListener("click", openSidebar);
 sidebarCloseButton.addEventListener("click", closeSidebar);
 
-const projects = getProjectsFromLocalStorage(); // TODO = Use LocalStorage instead of this
+const projects = getProjectsFromLocalStorage();
 
 if (projects.length === 0) {
     projects[0] = new Project("Example Project");
@@ -41,7 +41,6 @@ newProjectForm.addEventListener("submit", (e) => {
         displayProject(newProject);
         projects.push(newProject);
         fillProjectsList(projects);
-        saveProjectsToLocalStorage(projects);
         hideAddNewProjectForm();
     }
 });
@@ -54,4 +53,11 @@ const projectNameAlreadyExists = (name) => {
     }
 
     return false;
+}
+
+window.onbeforeunload = (e) => {
+    e.preventDefault();
+    saveProjectsToLocalStorage(projects);
+    e.returnValue = null;
+    return e.returnValue;
 }

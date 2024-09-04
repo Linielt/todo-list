@@ -17,7 +17,7 @@ export const storageAvailable = (type) => {
             storage.length !== 0
         );
     }
-}
+};
 
 export const getProjectsFromLocalStorage = () => {
     if (storageAvailable("localStorage")) {
@@ -30,13 +30,11 @@ export const getProjectsFromLocalStorage = () => {
 
         return revivedObjects;
     }
-}
+};
 
 export const saveProjectsToLocalStorage = (projects) => {
     if (storageAvailable("localStorage")) {
         localStorage.setItem("projects", JSON.stringify(projects));
     }
-}
-
-// const localStorageProjects = JSON.parse(localStorage.getItem("projects") || "[]");
+};
   

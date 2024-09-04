@@ -53,6 +53,10 @@ export class TodoItem {
         this.#complete = complete;
     }
 
+    addToProject(project) {
+        project.todos.push(this);
+    }
+
     toJSON() {
         return {
             "title":`${this.#title}`,

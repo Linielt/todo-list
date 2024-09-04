@@ -44,6 +44,7 @@ const createTodoDisclosureWidget = (todo, project) => {
 }
 
 export const fillProjectsList = (projects) => {
+    document.getElementById("projects").innerHTML = "";
     for (const project of projects) {
         addProjectToProjectsList(project);
     }
@@ -60,6 +61,10 @@ const addProjectToProjectsList = (project) => {
 
     projectContainer.appendChild(projectName);
     projectList.appendChild(projectContainer);
+
+    projectContainer.addEventListener("click", () =>{
+        displayProject(project);
+    });
 };
 
 export const changeProject = (project) => {
@@ -86,6 +91,8 @@ export const hideAddNewProjectForm = () => {
     document.body.style.pointerEvents = "auto";
 }
 
+let controller = new AbortController();
+
 export const displayProject = (project) => {
     const content = document.getElementById("content");
     content.innerHTML = "";
@@ -100,28 +107,34 @@ export const displayProject = (project) => {
 
     addTaskFormButton.addEventListener("click", showAddTaskForm);
 
-    const addTaskHandler = (e) => {
-        document.getElementById("add-task-form").removeEventListener("submit", addTaskHandler);
-        e.preventDefault();
-
-        let title = document.getElementById("task-title").value;
-        let description = document.getElementById("task-description").value;
-        let dueDate = document.getElementById("task-duedate").value;
-        let priority = document.getElementById("task-priority").value;
-
-        if (title == "" || description == "") { // TODO - Add validation for date
-            alert("You must fill in all fields.");
-        }
-        else {
-            let newTask = new TodoItem(title, description, dueDate, priority);
-            project.addTodo(newTask);
-            createTodoDisclosureWidget(newTask);
-            hideAddTaskForm();
-        }
-    };
-
     const addTaskForm = document.getElementById("add-task-form");
-    addTaskForm.addEventListener("submit", addTaskHandler);
+
+    const deleteAddTaskHandler = () => {
+        controller.abort();
+        controller = new AbortController();
+        addTaskForm.addEventListener("submit",
+            (e) => {
+                e.preventDefault();
+                let title = document.getElementById("task-title").value;
+                let description = document.getElementById("task-description").value;
+                let dueDate = document.getElementById("task-duedate").value;
+                let priority = document.getElementById("task-priority").value;
+        
+                if (title == "" || description == "") { // TODO - Add validation for date
+                    alert("You must fill in all fields.");
+                }
+                else {
+                    let newTask = new TodoItem(title, description, dueDate, priority);
+                    project.addTodo(newTask);
+                    createTodoDisclosureWidget(newTask);
+                    hideAddTaskForm();
+                }
+            },
+            { signal: controller.signal }
+        )
+    }
+
+    deleteAddTaskHandler();
 
     const closeNewTaskModalButton = document.getElementById("close-add-task-modal-button");
     closeNewTaskModalButton.addEventListener("click", hideAddTaskForm);

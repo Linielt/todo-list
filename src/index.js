@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
  
 import { TodoItem, Project, Priorities } from "./todoclasses";
 import { displayProject } from "./tododom";
@@ -12,23 +13,16 @@ const sidebarCloseButton = document.getElementById("close-sidebar");
 sidebarOpenButton.addEventListener("click", openSidebar);
 sidebarCloseButton.addEventListener("click", closeSidebar);
 
-const projects = []; // TODO = Use LocalStorage instead of this
-const localStorageProjects = getProjectsFromLocalStorage();
-projects.push(new Project("Tasks"));
-localStorageProjects.push(new Project("Test"))
+const projects = getProjectsFromLocalStorage(); // TODO = Use LocalStorage instead of this
+
+if (projects.length === 0) {
+    projects[0] = new Project("Example Project");
+}
 
 let selectedProject = projects[0];
 
-selectedProject.addTodo(new TodoItem("Example", "Example Todo Item", "01-01-2000", Priorities.Low)); // TODO - Change this when I add LocalStorage
-localStorageProjects[0].addTodo(new TodoItem("Test", "This is a test", "19-04-1971", Priorities.Medium));
-
-saveProjectsToLocalStorage(localStorageProjects);
-
-console.log(localStorageProjects);
-console.log(localStorageProjects[0]);
-
 displayProject(selectedProject);
-fillProjectsList(projects); // TODO - Make this take from LocalStorage
+fillProjectsList(projects);
 
 const newProjectForm = document.getElementById("new-project-form");
 newProjectForm.addEventListener("submit", (e) => {
@@ -39,9 +33,25 @@ newProjectForm.addEventListener("submit", (e) => {
     if (name == "") {
         alert("You must enter a title");
     }
+    else if (projectNameAlreadyExists(name)) {
+        alert("You cannot create a project with the same name");
+    }
     else {
         let newProject = new Project(name);
         displayProject(newProject);
+        projects.push(newProject);
+        fillProjectsList(projects);
+        saveProjectsToLocalStorage(projects);
         hideAddNewProjectForm();
     }
 });
+
+const projectNameAlreadyExists = (name) => {
+    for (let project of projects) {
+        if (project.name === name) {
+            return true;
+        }
+    }
+
+    return false;
+}

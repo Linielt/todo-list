@@ -105,8 +105,8 @@ export class Project {
     }
 
     alreadyHasTodoTitle(title) {
-        for (let todoTitle of this.#todos.title) {
-            if (todoTitle == title) {
+        for (let todo of this.#todos) {
+            if (todo.title == title) {
                 return true;
             }
         }
@@ -116,7 +116,6 @@ export class Project {
 
     toJSON() {
         let todosJSON = [];
-        console.log("aaaa");
 
         for (let todo of this.#todos) {
             todosJSON.push(todo.toJSON());

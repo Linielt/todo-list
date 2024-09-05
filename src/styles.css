@@ -149,7 +149,7 @@ header {
     outline: red 2px solid;
 }
 
-.accordion {
+/* .accordion {
     background-color: #eee;
     color: #444;
     cursor: pointer;
@@ -163,6 +163,14 @@ header {
 
 .active, .accordion:hover {
     background-color: #ccc;
+} */
+
+.todo-widget {
+    /* Do stuff here next time, it is time to style our todos
+    Also reminder to close sidebar when selecting new project
+    Also make sidebar project containers look better
+    */
+    outline: grey 2px solid;
 }
 
 .panel {

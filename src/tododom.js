@@ -16,6 +16,7 @@ const createTodoDisclosureWidget = (todo, project) => {
     const editButton = document.createElement("button");
     const completeButton = document.createElement("button");
 
+    disclousureWidget.className = "todo-widget";
     widgetSummary.innerHTML = todo.title;
     widgetSummary.className = "todo-title";
     todoDescription.textContent = todo.description;
@@ -172,7 +173,6 @@ const deleteAndCreateEditTaskHandler = (project, todo, disclosureWidget) => {
         }
         else {
             let indexOfTodoToEdit = project.todos.findIndex(todoToQuery => todoToQuery.title == todo.title);
-            console.log(indexOfTodoToEdit);
             project.todos[indexOfTodoToEdit].title = title;
             project.todos[indexOfTodoToEdit].description = description;
             project.todos[indexOfTodoToEdit].dueDate = dueDate;

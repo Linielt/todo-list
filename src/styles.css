@@ -4,6 +4,7 @@ body {
     border: 0;
     color: white;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
 }
 
 header {
@@ -170,7 +171,15 @@ header {
     Also reminder to close sidebar when selecting new project
     Also make sidebar project containers look better
     */
-    outline: grey 2px solid;
+    display: block;
+    justify-content: center;
+    width: 100%;
+    padding: 0.5em;
+    line-height: 1.5;
+    box-sizing: border-box;
+    line-height: 24px;
+    border: 1px solid #52b0e3;
+    border-radius: 8px;
 }
 
 .panel {

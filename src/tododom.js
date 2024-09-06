@@ -1,5 +1,5 @@
 import { TodoItem } from "./todoclasses";
-
+import { closeSidebar } from "./sidebar";
 const createTodoDisclosureWidgetsFromProject = (project) => {
     for (let todo of project.todos) {
         createTodoDisclosureWidget(todo, project);
@@ -90,6 +90,7 @@ const addProjectToProjectsList = (project) => {
 
     projectContainer.addEventListener("click", () =>{
         displayProject(project);
+        closeSidebar();
     });
 };
 

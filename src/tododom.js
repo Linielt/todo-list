@@ -8,7 +8,7 @@ const createTodoDisclosureWidgetsFromProject = (project) => {
 
 const createTodoDisclosureWidget = (todo, project) => {
     const content = document.getElementById("content");
-    const disclousureWidget = document.createElement("details");
+    const disclosureWidget = document.createElement("details");
     const widgetSummary = document.createElement("summary");
     const todoDescription = document.createElement("p");
     const todoDueDate = document.createElement("p");
@@ -16,7 +16,7 @@ const createTodoDisclosureWidget = (todo, project) => {
     const editButton = document.createElement("button");
     const completeButton = document.createElement("button");
 
-    disclousureWidget.className = "todo-widget";
+    disclosureWidget.className = "todo-widget";
     widgetSummary.innerHTML = todo.title;
     widgetSummary.className = "todo-title";
     todoDescription.textContent = todo.description;
@@ -24,20 +24,34 @@ const createTodoDisclosureWidget = (todo, project) => {
     todoDueDate.textContent = todo.dueDate;
     todoDueDate.className = "todo-duedate";
     deleteButton.textContent = "Delete";
-    deleteButton.style.backgroundColor = "red";
+    deleteButton.id = "todo-delete-button";
     editButton.textContent = "Edit";
+    editButton.id = "todo-edit-button";
     completeButton.textContent = "Complete";
+    completeButton.editButton = "todo-complete-button"
 
-    disclousureWidget.appendChild(widgetSummary);
-    disclousureWidget.appendChild(todoDescription);
-    disclousureWidget.appendChild(todoDueDate);
-    disclousureWidget.appendChild(deleteButton);
-    disclousureWidget.appendChild(editButton);
-    disclousureWidget.appendChild(completeButton);
-    content.appendChild(disclousureWidget);
+    const todoPriority = todo.priority;
+
+    if (todoPriority == 3) { // High
+        disclosureWidget.style.borderColor = "red";
+    }
+    else if (todoPriority == 2) { // Medium
+        disclosureWidget.style.borderColor = "yellow";
+    }
+    else if (todoPriority == 1) { // Low
+        disclosureWidget.style.borderColor = "blue";
+    }
+
+    disclosureWidget.appendChild(widgetSummary);
+    disclosureWidget.appendChild(todoDescription);
+    disclosureWidget.appendChild(todoDueDate);
+    disclosureWidget.appendChild(deleteButton);
+    disclosureWidget.appendChild(editButton);
+    disclosureWidget.appendChild(completeButton);
+    content.appendChild(disclosureWidget);
 
     deleteButton.addEventListener("click", () => {
-        disclousureWidget.remove();
+        disclosureWidget.remove();
         project.removeTodo(todo);
     });
 
@@ -50,13 +64,25 @@ const createTodoDisclosureWidget = (todo, project) => {
         headerContent.innerHTML = "Edit Task";
         header.appendChild(headerContent);
 
-        deleteAndCreateEditTaskHandler(project, todo, disclousureWidget);
+        deleteAndCreateEditTaskHandler(project, todo, disclosureWidget);
     });
 
     completeButton.addEventListener("click", () => {
         todo.complete = !todo.complete;
         completeButton.classList.toggle("complete");
+        disclosureWidget.classList.toggle("todo-widget-complete");
     });
+
+    const todoIsComplete = todo.complete;
+    console.log(todo);
+    console.log(todo.title, todoIsComplete);
+
+    if (todoIsComplete) {
+        completeButton.click();
+        if (todo.complete === false) {
+            todo.complete = true;
+        }
+    }
 }
 
 const editDisclosureWidget = (disclosureWidget, title, description, dueDate) => {
@@ -137,7 +163,7 @@ const deleteAndCreateAddTaskHandler = (project) => { // TODO - Weird revelation,
                 alert("You already have a todo with this title.");
             }
             else {
-                let newTask = new TodoItem(title, description, dueDate, priority);
+                let newTask = new TodoItem(title, description, dueDate, priority, false);
                 project.addTodo(newTask);
                 createTodoDisclosureWidget(newTask);
                 hideTaskForm();

@@ -1,6 +1,6 @@
-/* eslint-disable no-unused-vars */
  
-import { TodoItem, Project, Priorities } from "./todoclasses";
+ 
+import { Project } from "./todoclasses";
 import { displayProject } from "./tododom";
 import "./styles.css";
 import { closeSidebar, openSidebar } from "./sidebar";

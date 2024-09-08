@@ -5,12 +5,12 @@ export class TodoItem {
     #priority;
     #complete;
 
-    constructor(title, description, dueDate, priority) {
+    constructor(title, description, dueDate, priority, complete) {
         this.#title = title;
         this.#description = description;
         this.#dueDate = dueDate;
         this.#priority = priority;
-        this.#complete = false;
+        this.#complete = complete;
     }
 
     get title() {
@@ -68,7 +68,7 @@ export class TodoItem {
     }
 
     static fromJSON(json) {
-        return new TodoItem(json.title, json.description, json.dueDate, json.priority, json.complete);
+        return new TodoItem(json.title, json.description, json.dueDate, json.priority, JSON.parse(json.complete));
     }
 }
 

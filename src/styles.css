@@ -72,11 +72,12 @@ header {
 
 #add-new-project-button {
     background-color: rgb(42, 88, 197);
+    color: white;
     margin-bottom: 24px;
 }
 
 #sidebar button {
-    color: cadetblue;
+    color: white;
     box-sizing: border-box;
     border: none;
     box-shadow: none;
@@ -137,9 +138,10 @@ header {
     border: #444;
     width: 100%;
     border-radius: 8px;
-    background-color: darkblue;
+    background-color: #444;
     color: white;
     outline: white 1px solid;
+    margin-bottom: 16px;
 }
 
 .project-container > p {
@@ -147,24 +149,8 @@ header {
 }
 
 .todo-container {
-    outline: red 2px solid;
+    
 }
-
-/* .accordion {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    text-align: left;
-    border: none;
-    outline: none;
-    transition: 0.4s;
-}
-
-.active, .accordion:hover {
-    background-color: #ccc;
-} */
 
 .todo-widget {
     /* Do stuff here next time, it is time to style our todos
@@ -174,12 +160,14 @@ header {
     display: block;
     justify-content: center;
     width: 100%;
-    padding: 0.5em;
+    padding: 1em;
     line-height: 1.5;
     box-sizing: border-box;
     line-height: 24px;
-    border: 1px solid #52b0e3;
+    border: 1px solid;
+    border-color: #52b0e3;
     border-radius: 8px;
+    margin-bottom: 4px;
 }
 
 .panel {
@@ -191,4 +179,8 @@ header {
 
 .complete {
     background-color: limegreen;
+}
+
+.todo-widget-complete {
+    color: limegreen;
 }

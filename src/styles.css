@@ -106,23 +106,85 @@ header {
     background-color: #444;
 }
 
-#task-modal {
-    display: none;
+#task-modal[open] {
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    outline: 4px red solid;
     padding: 16px;
     z-index: 99999;
     pointer-events: auto;
+    background-color: #444;
+    color: white;
 }
 
-#new-project-modal {
-    display: none;
+#new-project-modal[open] {
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     pointer-events: auto;
+}
+
+.modal-footer {
+    margin-top: 16px;
+}
+
+#close-new-project-modal-button, #close-task-modal-button {
+    color: white;
+    box-sizing: border-box;
+    border: none;
+    box-shadow: none;
+    padding: 10px 10px 8px;
+    border-radius: 8px;
+    background-color: #666;
+}
+
+#save-task-modal-button, #add-new-project-modal-button {
+    color: white;
+    box-sizing: border-box;
+    border: none;
+    box-shadow: none;
+    padding: 10px 10px 8px;
+    border-radius: 8px;
+    background-color: #52b0e3;
+}
+
+select {
+    box-sizing: border-box;
+    appearance: none;
+    background-color: transparent;
+    border: 1px solid #666;
+    padding: 4px;
+    border-radius: 8px;
+    margin: 0;
+    width: 100%;
+    color: white;
+}
+
+option {
+    background-color: #666;
+}
+
+dialog {
+    padding: 0;
+    border: 0;
+    border-radius: 0.6rem;
+    box-shadow: 0 0 1em black;
+}
+
+dialog::backdrop {
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+input {
+    font-size: 16px;
+    margin-bottom: 8px;
+    background-color: #444;
+    outline: 1px solid #111;
+    color: white;
+    border-radius: 8px;
+    border-style: solid;
 }
 
 #projects {

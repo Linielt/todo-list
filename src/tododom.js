@@ -121,23 +121,19 @@ const addProjectToProjectsList = (project) => {
 };
 
 const showTaskForm = () => { // TODO - Rename all of these
-    document.getElementById("task-modal").style.display = "flex";
-    document.body.style.pointerEvents = "none";
+    document.getElementById("task-modal").showModal();
 }
 
 const hideTaskForm = () => {
-    document.getElementById("task-modal").style.display = "none";
-    document.body.style.pointerEvents = "auto";
+    document.getElementById("task-modal").close();
 }
 
 const showAddNewProjectForm = () => {
-    document.getElementById("new-project-modal").style.display = "flex";
-    document.body.style.pointerEvents = "none";
+    document.getElementById("new-project-modal").showModal();
 }
 
 export const hideAddNewProjectForm = () => {
-    document.getElementById("new-project-modal").style.display = "none";
-    document.body.style.pointerEvents = "auto";
+    document.getElementById("new-project-modal").close();
 }
 
 const taskForm = document.getElementById("task-form");
